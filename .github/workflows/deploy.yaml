@@ -38,14 +38,14 @@ jobs:
           bun run build
           touch .vitepress/dist/.nojekyll
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: .vitepress/dist
 
   deploy:
     environment:
       name: github-pages
-      url: 'https://citrus11.github.io/'
+      url: ${{ steps.deployment.outputs.page_url }}
     needs: build
     runs-on: ubuntu-latest
     name: Deploy
